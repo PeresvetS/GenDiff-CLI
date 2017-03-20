@@ -1,0 +1,39 @@
+{
+  "name": "diff-eval",
+  "version": "0.0.2",
+  "description": "Hexlet project",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel-node": "babel-node",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublish": "npm run build",
+    "eslint": "eslint"
+  },
+  "bin": {
+    "gendiff": "dist/bin/gendiff.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeresvetS/project-lvl2-s70.git"
+  },
+  "author": "Peresvet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PeresvetS/project-lvl2-s70/issues"
+  },
+  "homepage": "https://github.com/PeresvetS/project-lvl2-s70#readme",
+  "dependencies": {
+    "commander": "^2.9.0"
+  },
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-core": "*",
+    "babel-preset-env": "*",
+    "babel-preset-stage-0": "*",
+    "eslint": "*",
+    "eslint-plugin-import": "*",
+    "eslint-config-airbnb-base": "*",
+    "babel-eslint": "*"
+  }
+}

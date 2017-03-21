@@ -9,7 +9,7 @@ const compareData = (oldFile, newFile) => {
     if (!oldFile[key]) {
       return { type: 'added', key, new: newFile[key] };
     }
-    if (!oldFile[key]) {
+    if (!newFile[key]) {
       return { type: 'removed', key, old: oldFile[key] };
     }
     if (oldFile[key] === newFile[key]) {

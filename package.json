@@ -1,6 +1,6 @@
 {
   "name": "diff-eval",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hexlet project",
   "main": "dist/index.js",
   "scripts": {
@@ -26,7 +26,8 @@
   "homepage": "https://github.com/PeresvetS/project-lvl2-s70#readme",
   "dependencies": {
     "commander": "^2.9.0",
-    "lodash": "*"
+    "lodash": "*",
+    "js-yaml" : "*"
   },
   "devDependencies": {
     "babel-cli": "*",

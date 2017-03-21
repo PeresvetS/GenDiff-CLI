@@ -10,7 +10,7 @@ test('correct differences of json', () => {
 + verbose: true
 }`;
 
-  const file1 = '__tests__/testFiles/before.json';
-  const file2 = '__tests__/testFiles/after.json';
+  const file1 = '__tests__/testFiles/before.yml';
+  const file2 = '__tests__/testFiles/after.yml';
   expect(diffOfFiles(file1, file2)).toBe(correct);
 });

@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import fs from 'fs';
+import parser from './parsers/parser';
 
 
 const comparison = (file1, file2) => {
@@ -44,8 +45,8 @@ const getDiff = (file1, file2) => {
     throw new Error(`File ${file2} doesn't exists`);
   }
 
-  const file1Parse = JSON.parse(fs.readFileSync(file1));
-  const file2Parse = JSON.parse(fs.readFileSync(file2));
+  const file1Parse = parser(fs.readFileSync(file1, 'utf8'), file1);
+  const file2Parse = parser(fs.readFileSync(file2, 'utf8'), file2);
 
   const finalOutput = parse(comparison(file1Parse, file2Parse));
   return finalOutput;

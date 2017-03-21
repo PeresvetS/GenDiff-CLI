@@ -1,6 +1,6 @@
 {
   "name": "diff-eval",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Hexlet project",
   "main": "dist/index.js",
   "scripts": {
@@ -27,7 +27,8 @@
   "dependencies": {
     "commander": "^2.9.0",
     "lodash": "*",
-    "js-yaml" : "*"
+    "js-yaml" : "*",
+    "ini-config-parser": "*"
   },
   "devDependencies": {
     "babel-cli": "*",

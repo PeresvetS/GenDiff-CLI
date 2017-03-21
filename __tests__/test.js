@@ -10,19 +10,19 @@ const correct = `
 }`;
 
 test('correct differences of json', () => {
-  const file1 = '__tests__/testFiles/before.json';
-  const file2 = '__tests__/testFiles/after.json';
+  const file1 = '__tests__/fixtures/before.json';
+  const file2 = '__tests__/fixtures/after.json';
   expect(diffOfFiles(file1, file2)).toBe(correct);
 });
 
 test('correct differences of yml', () => {
-  const file1 = '__tests__/testFiles/before.yml';
-  const file2 = '__tests__/testFiles/after.yml';
+  const file1 = '__tests__/fixtures/before.yml';
+  const file2 = '__tests__/fixtures/after.yml';
   expect(diffOfFiles(file1, file2)).toBe(correct);
 });
 
 test('correct differences of ini', () => {
-  const file1 = '__tests__/testFiles/before.ini';
-  const file2 = '__tests__/testFiles/after.ini';
+  const file1 = '__tests__/fixtures/before.ini';
+  const file2 = '__tests__/fixtures/after.ini';
   expect(diffOfFiles(file1, file2)).toBe(correct);
 });

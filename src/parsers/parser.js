@@ -1,18 +1,18 @@
-import jsonParser from './jsonParser';
-import yamlParser from './yamlParser';
-import iniParser from './iniParser';
+import jsonParse from './jsonParser';
+import yamlParse from './yamlParser';
+import iniParse from './iniParser';
 
-const parser = (file, path) => {
+const parse = (file, path) => {
   const format = path.split('.')[1];
   switch (format) {
     case 'json':
-      return jsonParser(file);
+      return jsonParse(file);
     case 'yml':
-      return yamlParser(file);
+      return yamlParse(file);
     case 'ini':
-      return iniParser(file);
+      return iniParse(file);
     default :
       throw new Error(`Format ${format} is not supported!`);
   }
 };
-export default parser;
+export default parse;

@@ -1,33 +1,33 @@
 import _ from 'lodash';
 import fs from 'fs';
-import parser from './parsers/parser';
+import parse from './parsers/parser';
 
 
-const compareOfFiles = (fileBefore, fileAfter) => {
-  const allKeys = _.union(_.keys(fileBefore), _.keys(fileAfter))
+const compareData = (oldFile, newFile) => {
+  const allKeys = _.union(_.keys(oldFile), _.keys(newFile))
   .map((key) => {
-    if (!fileBefore[key]) {
-      return { type: 'added', key, new: fileAfter[key] };
+    if (!oldFile[key]) {
+      return { type: 'added', key, new: newFile[key] };
     }
-    if (!fileAfter[key]) {
-      return { type: 'removed', key, old: fileBefore[key] };
+    if (!oldFile[key]) {
+      return { type: 'removed', key, old: oldFile[key] };
     }
-    if (fileBefore[key] === fileAfter[key]) {
-      return { type: 'unchanged', key, old: fileBefore[key] };
+    if (oldFile[key] === newFile[key]) {
+      return { type: 'unchanged', key, old: oldFile[key] };
     }
-    if (_.isObject(fileBefore[key]) && _.isObject(fileAfter[key])) {
-      return { type: 'unchanged', key, child: [...compareOfFiles(fileBefore[key], fileAfter[key])] };
+    if (_.isObject(oldFile[key]) && _.isObject(newFile[key])) {
+      return { type: 'unchanged', key, child: [...compareData(oldFile[key], newFile[key])] };
     }
-    return { type: 'changed', key, old: fileBefore[key], new: fileAfter[key] };
+    return { type: 'changed', key, old: oldFile[key], new: newFile[key] };
   });
 
   return _.flatten(allKeys);
 };
 
-const showDifference = (compare) => {
-  const output = _.keys(compare)
+const getDifference = (comparedData) => {
+  const result = _.keys(comparedData)
   .reduce((acc, key) => {
-    const file = compare[key];
+    const file = comparedData[key];
     switch (file.type) {
       case 'added':
         return `${acc}+ ${file.key}: ${file.new}\n`;
@@ -39,18 +39,22 @@ const showDifference = (compare) => {
         return `${acc}+ ${file.key}: ${file.new}\n- ${file.key}: ${file.old}\n`;
     }
   }, '\n');
-  return `\n{${output}}`;
+  return `\n{${result}}`;
 };
 
 const getData = file => fs.readFileSync(file, 'utf8');
 
-const getDiff = (fileBefore, fileAfter) => {
-  const fileBeforeParsed = parser(getData(fileBefore), fileBefore);
-  const fileAfterParsed = parser(getData(fileAfter), fileAfter);
-  const compare = compareOfFiles(fileBeforeParsed, fileAfterParsed);
-  const finalOutput = showDifference(compare);
-  return finalOutput;
+const differenceOfFiles = (oldFile, newFile) => {
+  const rawDataOld = getData(oldFile);
+  const rawDataNew = getData(newFile);
+
+  const processedDataOld = parse(rawDataOld, oldFile);
+  const processedDataNew = parse(rawDataNew, newFile);
+
+  const comparedData = compareData(processedDataOld, processedDataNew);
+  const result = getDifference(comparedData);
+  return result;
 };
 
 
-export default getDiff;
+export default differenceOfFiles;

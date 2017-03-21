@@ -1,6 +1,6 @@
 {
   "name": "diff-eval",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Hexlet project",
   "main": "dist/index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "babel-node": "babel-node",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublish": "npm run build",
-    "eslint": "eslint"
+    "eslint": "eslint",
+    "test": "jest"
   },
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
@@ -24,7 +25,8 @@
   },
   "homepage": "https://github.com/PeresvetS/project-lvl2-s70#readme",
   "dependencies": {
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "lodash": "*"
   },
   "devDependencies": {
     "babel-cli": "*",
@@ -34,6 +36,7 @@
     "eslint": "*",
     "eslint-plugin-import": "*",
     "eslint-config-airbnb-base": "*",
-    "babel-eslint": "*"
+    "babel-eslint": "*",
+    "jest": "*"
   }
 }

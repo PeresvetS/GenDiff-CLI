@@ -38,12 +38,6 @@ const parse = (diff) => {
 };
 
 const getDiff = (file1, file2) => {
-  if (fs.exists(file1)) {
-    throw new Error(`File ${file1} doesn't exists`);
-  }
-  if (fs.exists(file2)) {
-    throw new Error(`File ${file2} doesn't exists`);
-  }
 
   const file1Parse = parser(fs.readFileSync(file1, 'utf8'), file1);
   const file2Parse = parser(fs.readFileSync(file2, 'utf8'), file2);

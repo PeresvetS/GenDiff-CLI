@@ -3,46 +3,45 @@ import fs from 'fs';
 import parser from './parsers/parser';
 
 
-const comparison = (file1, file2) => {
-  const allKeys = _.union(_.keys(file1), _.keys(file2));
+const compareOfFiles = (fileBefore, fileAfter) => {
+  const allKeys = _.union(_.keys(fileBefore), _.keys(fileAfter));
   return allKeys.map((key) => {
-    if (!file1[key]) {
-      return { type: 'added', key, new: file2[key] };
+    if (!fileBefore[key]) {
+      return { type: 'added', key, new: fileAfter[key] };
     }
-    if (!file2[key]) {
-      return { type: 'removed', key, old: file1[key] };
+    if (!fileAfter[key]) {
+      return { type: 'removed', key, old: fileBefore[key] };
     }
-    if (file1[key] === file2[key]) {
-      return { type: 'unchanged', key, old: file1[key] };
+    if (fileBefore[key] === fileAfter[key]) {
+      return { type: 'unchanged', key, old: fileBefore[key] };
     }
-    return { type: 'changed', key, old: file1[key], new: file2[key] };
+    return { type: 'changed', key, old: fileBefore[key], new: fileAfter[key] };
   });
 };
 
-const parse = (diff) => {
-  const output = _.keys(diff)
+const showDifference = (compare) => {
+  const output = _.keys(compare)
   .reduce((acc, key) => {
-    const value = diff[key];
-    if (value.type === 'added') {
-      return `${acc}+ ${value.key}: ${value.new}\n`;
+    const file = compare[key];
+    if (file.type === 'added') {
+      return `${acc}+ ${file.key}: ${file.new}\n`;
     }
-    if (value.type === 'unchanged') {
-      return `${acc}  ${value.key}: ${value.old}\n`;
+    if (file.type === 'unchanged') {
+      return `${acc}  ${file.key}: ${file.old}\n`;
     }
-    if (value.type === 'removed') {
-      return `${acc}- ${value.key}: ${value.old}\n`;
+    if (file.type === 'removed') {
+      return `${acc}- ${file.key}: ${file.old}\n`;
     }
-    return `${acc}+ ${value.key}: ${value.new}\n- ${value.key}: ${value.old}\n`;
+    return `${acc}+ ${file.key}: ${file.new}\n- ${file.key}: ${file.old}\n`;
   }, '\n');
   return `\n{${output}}`;
 };
 
-const getDiff = (file1, file2) => {
-
-  const file1Parse = parser(fs.readFileSync(file1, 'utf8'), file1);
-  const file2Parse = parser(fs.readFileSync(file2, 'utf8'), file2);
-
-  const finalOutput = parse(comparison(file1Parse, file2Parse));
+const getDiff = (fileBefore, fileAfter) => {
+  const fileBeforeParsed = parser(fs.readFileSync(fileBefore, 'utf8'), fileBefore);
+  const fileAfterParsed = parser(fs.readFileSync(fileAfter, 'utf8'), fileAfter);
+  const compare = compareOfFiles(fileBeforeParsed, fileAfterParsed);
+  const finalOutput = showDifference(compare);
   return finalOutput;
 };
 

@@ -12,8 +12,7 @@ const parser = (file, path) => {
     case 'ini':
       return iniParser(file);
     default :
-      console.log('Bad format!');
-      return undefined;
+      throw new Error(`Format ${format} is not supported!`);
   }
 };
 export default parser;

@@ -4,16 +4,16 @@ const getDifference = (comparedData) => {
   const result = _.keys(comparedData)
   .slice()
   .reduce((acc, key) => {
-    const data = comparedData[key];
-    switch (data.type) {
+    const elem = comparedData[key];
+    switch (elem.type) {
       case 'added':
-        return `${acc}+ ${data.key}: ${data.value}\n`;
+        return `${acc}+ ${elem.key}: ${elem.value}\n`;
       case 'unchanged':
-        return `${acc}  ${data.key}: ${data.value}\n`;
+        return `${acc}  ${elem.key}: ${elem.value}\n`;
       case 'removed':
-        return `${acc}- ${data.key}: ${data.value}\n`;
+        return `${acc}- ${elem.key}: ${elem.value}\n`;
       default:
-        return `${acc}+ ${data.key}: ${data.new}\n- ${data.key}: ${data.old}\n`;
+        return `${acc}+ ${elem.key}: ${elem.new}\n- ${elem.key}: ${elem.old}\n`;
     }
   }, '\n');
   return `\n{${result}}`;

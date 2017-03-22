@@ -18,7 +18,7 @@ const compareData = (oldFile, newFile) => {
       return { type: 'unchanged', key, value: oldFile[key] };
     }
     if (_.isObject(oldFile[key])) {
-      return { type: 'parent', key, children: compareData(oldFile[key], newFile[key]) };
+      return { type: 'parent', key, value: compareData(oldFile[key], newFile[key]) };
     }
     return { type: 'changed', key, old: oldFile[key], new: newFile[key] };
   });

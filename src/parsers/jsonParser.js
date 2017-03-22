@@ -1,1 +1,1 @@
-export default file => JSON.parse(file);
+export default data => JSON.parse(data);

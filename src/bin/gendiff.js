@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import program from 'commander';
-import diffOfFiles from '../';
+import genDiff from '../';
 
 program
     .version('0.2.1')
@@ -9,6 +9,6 @@ program
     .option('-f, --format [type]', 'Output format')
     .arguments('<first_config> <second_config>')
     .action((firstConfig, secondConfig) => {
-      console.log(diffOfFiles(firstConfig, secondConfig));
+      console.log(genDiff(firstConfig, secondConfig));
     })
     .parse(process.argv);

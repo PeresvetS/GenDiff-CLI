@@ -1,4 +1,4 @@
-import getDiffFromPlain from './plain';
+import getDiffFromPlain from './flat';
 import getDiffFromExtended from './extended';
 
 const rendering = (comparedData) => {

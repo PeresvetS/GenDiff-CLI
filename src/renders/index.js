@@ -6,7 +6,7 @@ const rendering = (comparedData) => {
   switch (type) {
     case 'extended':
       return getDiffFromExtended(comparedData);
-    case 'plain':
+    case 'flat':
       return getDiffFromPlain(comparedData);
     default:
       throw new Error('Incorrect file contents.');

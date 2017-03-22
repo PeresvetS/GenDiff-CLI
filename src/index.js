@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
-import parse from './parsers/index';
-import getDifference from './renders/index';
+import parse from './parsers/';
+import getDifference from './renders/';
 
 
 const compareData = (oldFile, newFile) => {

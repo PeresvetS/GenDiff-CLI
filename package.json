@@ -39,6 +39,7 @@
     "eslint-plugin-import": "*",
     "eslint-config-airbnb-base": "*",
     "babel-eslint": "*",
+    "eslint-plugin-jest": "^19.0.1",
     "jest": "*"
   }
 }

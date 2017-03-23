@@ -18,7 +18,7 @@ const message = (elem) => {
 
 const getDiff = (comparedData, parent) => {
   const path = parent ? `${parent}.` : '';
-  return comparedData.reduce((acc, elem) => {
+  const result = comparedData.reduce((acc, elem) => {
     switch (elem.type) {
       case 'parent':
         return [...acc, getDiff(elem.value, elem.key)];
@@ -27,8 +27,8 @@ const getDiff = (comparedData, parent) => {
       default:
         return [...acc, `\nProperty '${path}${elem.key}' was ${message(elem)}`];
     }
-  }, {})
-  .join('');
+  }, {});
+  return _.join(result, '');
 };
 
 export default getDiff;

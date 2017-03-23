@@ -48,6 +48,60 @@ Property 'group3' was removed
 Property 'verbose' was added with value: true
 Property 'group2' was added with complex value`;
 
+const correctJson = `
+{
+    "common": {
+          "setting1": "Value 1",
+        - "setting2": "200",
+          "setting3": true,
+        - "setting6": {
+            "key": "value"
+        },
+        + "setting4": "blah blah",
+        + "setting5": {
+            "key5": "value5"
+        }
+    },
+    "group1": {
+        + "baz": "bars",
+        - "baz": "bas",
+          "foo": "bar"
+    },
+    - "group2": {
+        "abc": "12345"
+    },
+    + "group3": {
+        "fee": "100500"
+    }
+}`;
+
+const correctYml = `
+{
+    "common": {
+          "setting1": "Value 1",
+        - "setting2": 200,
+          "setting3": true,
+        - "setting6": {
+            "key": "value"
+        },
+        + "setting4": "blah blah",
+        + "setting5": {
+            "key5": "value5"
+        }
+    },
+    "group1": {
+        + "baz": "bars",
+        - "baz": "bas",
+          "foo": "bar"
+    },
+    - "group2": {
+        "abc": 12345
+    },
+    + "group3": {
+        "fee": 100500
+    }
+}`;
+
 test('correct differences of json', () => {
   const fileBefore = '__tests__/fixtures/json/before.json';
   const fileAfter = '__tests__/fixtures/json/after.json';
@@ -100,4 +154,22 @@ test('correct differences of ini', () => {
   const fileBefore = '__tests__/fixtures/ini/beforePlain.ini';
   const fileAfter = '__tests__/fixtures/ini/afterPlain.ini';
   expect(diffOfFiles(fileBefore, fileAfter, 'plain')).toBe(correctPlain);
+});
+
+test('correct differences of json', () => {
+  const fileBefore = '__tests__/fixtures/json/beforeAttach.json';
+  const fileAfter = '__tests__/fixtures/json/afterAttach.json';
+  expect(diffOfFiles(fileBefore, fileAfter, 'json')).toBe(correctJson);
+});
+
+test('correct differences of yaml', () => {
+  const fileBefore = '__tests__/fixtures/yaml/beforeAttach.yml';
+  const fileAfter = '__tests__/fixtures/yaml/afterAttach.yml';
+  expect(diffOfFiles(fileBefore, fileAfter, 'json')).toBe(correctYml);
+});
+
+test('correct differences of ini', () => {
+  const fileBefore = '__tests__/fixtures/ini/beforeAttach.ini';
+  const fileAfter = '__tests__/fixtures/ini/afterAttach.ini';
+  expect(diffOfFiles(fileBefore, fileAfter, 'json')).toBe(correctJson);
 });

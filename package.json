@@ -1,6 +1,6 @@
 {
   "name": "diff-eval",
-  "version": "0.4.4",
+  "version": "0.9.0",
   "description": "Hexlet project",
   "main": "dist/index.js",
   "scripts": {

@@ -6,7 +6,7 @@ const parse = (file, extension) => {
   switch (extension) {
     case '.json':
       return jsonParse(file);
-    case '.yml':
+    case '.yml' || '.yaml':
       return yamlParse(file);
     case '.ini':
       return iniParse(file);

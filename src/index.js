@@ -1,35 +1,13 @@
-import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
-import parse from './parsers/';
-import getDifference from './renders/';
-
-
-const compareData = (oldFile, newFile) => {
-  const allKeys = _.union(_.keys(oldFile), _.keys(newFile))
-  .map((key) => {
-    if (!oldFile[key]) {
-      return { type: 'added', key, value: newFile[key] };
-    }
-    if (!newFile[key]) {
-      return { type: 'removed', key, value: oldFile[key] };
-    }
-    if (oldFile[key] === newFile[key]) {
-      return { type: 'unchanged', key, value: oldFile[key] };
-    }
-    if (_.isObject(oldFile[key])) {
-      return { type: 'parent', key, value: compareData(oldFile[key], newFile[key]) };
-    }
-    return { type: 'changed', key, old: oldFile[key], new: newFile[key] };
-  });
-
-  return _.flatten(allKeys);
-};
+import parse from './lib/parsers/';
+import getDifference from './lib/renders/';
+import compareData from './lib/compare';
 
 const getData = file => fs.readFileSync(file, 'utf8');
 const getExtFile = file => path.extname(file);
 
-const generateDiff = (oldFile, newFile) => {
+const generateDiff = (oldFile, newFile, format = 'sjson') => {
   const rawDataOld = getData(oldFile);
   const rawDataNew = getData(newFile);
 
@@ -40,9 +18,8 @@ const generateDiff = (oldFile, newFile) => {
   const processedDataNew = parse(rawDataNew, extenstionNew);
 
   const comparedData = compareData(processedDataOld, processedDataNew);
-  const result = getDifference(comparedData);
+  const result = getDifference(comparedData, format);
   return result;
 };
-
 
 export default generateDiff;

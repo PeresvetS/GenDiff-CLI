@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+// there is function for flat file
+
 const getDifference = (comparedData) => {
   const result = _.keys(comparedData)
   .slice()

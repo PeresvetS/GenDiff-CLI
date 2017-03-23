@@ -1,3 +1,3 @@
-import ini from 'ini-config-parser';
+import ini from 'ini';
 
 export default data => ini.parse(data);

@@ -1,19 +1,19 @@
-const signs = {
-  added: '(+)',
-  removed: '(-)',
-  unchanged: '',
-};
+import _ from 'lodash';
 
 const getDiff = (comparedData) => {
   const result = comparedData.reduce((acc, elem) => {
-    const { type, key, value, rem, add } = elem;
+    const { type, key, value, removed, added } = elem;
     switch (type) {
       case 'parent':
         return { ...acc, [key]: getDiff(value) };
       case 'changed':
-        return { ...acc, [`(+)${key}`]: add, [`(-)${key}`]: rem };
-      default:
-        return { ...acc, [`${signs[type]}${key}`]: value };
+        return { ...acc, [key]: { added, removed } };
+      case 'unchanged':
+        return { ...acc, [key]: value };
+      default :
+        return !_.has(acc, [type]) ?
+        { ...acc, [type]: { [key]: value } } :
+        _.defaultsDeep(acc, { ...acc, [type]: { [key]: value } });
     }
   }, '');
   return result;

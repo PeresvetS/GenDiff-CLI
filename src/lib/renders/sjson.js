@@ -6,12 +6,12 @@ const signs = {
 
 const getDiff = (comparedData) => {
   const result = comparedData.reduce((acc, elem) => {
-    const { type, key, value, rem, add } = elem;
+    const { type, key, value, removed, added } = elem;
     switch (type) {
       case 'parent':
         return { ...acc, [key]: getDiff(value) };
       case 'changed':
-        return { ...acc, [`+ ${key}`]: add, [`- ${key}`]: rem };
+        return { ...acc, [`+ ${key}`]: added, [`- ${key}`]: removed };
       default:
         return { ...acc, [`${signs[type]} ${key}`]: value };
     }

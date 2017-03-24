@@ -8,12 +8,12 @@ const action = {
 
 
 const message = (elem) => {
-  const { type, value, rem, add } = elem;
+  const { type, value, removed, added } = elem;
   let change;
   if (type === 'added') {
     change = _.isObject(value) ? 'complex value' : `value: ${value}`;
   } else {
-    change = (type === 'changed') ? `From '${rem}' to '${add}'` : '';
+    change = (type === 'changed') ? `From '${removed}' to '${added}'` : '';
   }
   return `${action[type]}${change}`;
 };

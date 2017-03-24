@@ -51,14 +51,16 @@ Property 'group2' was added with complex value`;
 const correctJson = `
 {
   "common": {
-    "setting1": "Value 1",
+    "unchanged": {
+      "setting1": "Value 1",
+      "setting3": true
+    },
     "removed": {
       "setting2": "200",
       "setting6": {
         "key": "value"
       }
     },
-    "setting3": true,
     "added": {
       "setting4": "blah blah",
       "setting5": {
@@ -71,7 +73,9 @@ const correctJson = `
       "added": "bars",
       "removed": "bas"
     },
-    "foo": "bar"
+    "unchanged": {
+      "foo": "bar"
+    }
   },
   "removed": {
     "group2": {
@@ -88,14 +92,16 @@ const correctJson = `
 const correctYml = `
 {
   "common": {
-    "setting1": "Value 1",
+    "unchanged": {
+      "setting1": "Value 1",
+      "setting3": true
+    },
     "removed": {
       "setting2": 200,
       "setting6": {
         "key": "value"
       }
     },
-    "setting3": true,
     "added": {
       "setting4": "blah blah",
       "setting5": {
@@ -108,7 +114,9 @@ const correctYml = `
       "added": "bars",
       "removed": "bas"
     },
-    "foo": "bar"
+    "unchanged": {
+      "foo": "bar"
+    }
   },
   "removed": {
     "group2": {

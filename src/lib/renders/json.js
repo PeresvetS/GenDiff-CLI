@@ -8,8 +8,6 @@ const getDiff = (comparedData) => {
         return { ...acc, [key]: getDiff(value) };
       case 'changed':
         return { ...acc, [key]: { added, removed } };
-      case 'unchanged':
-        return { ...acc, [key]: value };
       default :
         return !_.has(acc, [type]) ?
         { ...acc, [type]: { [key]: value } } :

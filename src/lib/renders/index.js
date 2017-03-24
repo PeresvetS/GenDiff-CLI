@@ -11,7 +11,7 @@ const rendering = (comparedData, format) => {
     case 'json':
       return getDiffJson(comparedData);
     default:
-      throw new Error(`Incorrect file ${format}`);
+      throw new Error(`Incorrect file format ${format}`);
   }
 };
 

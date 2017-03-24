@@ -50,56 +50,56 @@ Property 'group2' was added with complex value`;
 
 const correctJson = `
 {
-    "common": {
-          "setting1": "Value 1",
-        - "setting2": "200",
-          "setting3": true,
-        - "setting6": {
-            "key": "value"
-        },
-        + "setting4": "blah blah",
-        + "setting5": {
-            "key5": "value5"
-        }
+  "common": {
+    "setting1": "Value 1",
+    "(-)setting2": "200",
+    "setting3": true,
+    "(-)setting6": {
+      "key": "value"
     },
-    "group1": {
-        + "baz": "bars",
-        - "baz": "bas",
-          "foo": "bar"
-    },
-    - "group2": {
-        "abc": "12345"
-    },
-    + "group3": {
-        "fee": "100500"
+    "(+)setting4": "blah blah",
+    "(+)setting5": {
+      "key5": "value5"
     }
+  },
+  "group1": {
+    "(+)baz": "bars",
+    "(-)baz": "bas",
+    "foo": "bar"
+  },
+  "(-)group2": {
+    "abc": "12345"
+  },
+  "(+)group3": {
+    "fee": "100500"
+  }
 }`;
 
 const correctYml = `
 {
-    "common": {
-          "setting1": "Value 1",
-        - "setting2": 200,
-          "setting3": true,
-        - "setting6": {
-            "key": "value"
-        },
-        + "setting4": "blah blah",
-        + "setting5": {
-            "key5": "value5"
-        }
+  "common": {
+    "setting1": "Value 1",
+    "(-)setting2": 200,
+    "setting3": true,
+    "(-)setting6": {
+      "key": "value"
     },
-    "group1": {
-        + "baz": "bars",
-        - "baz": "bas",
-          "foo": "bar"
-    },
-    - "group2": {
-        "abc": 12345
-    },
-    + "group3": {
-        "fee": 100500
+    "(+)setting4": "blah blah",
+    "(+)setting5": {
+      "key5": "value5"
     }
+  },
+  "group1": {
+    "(+)baz": "bars",
+    "(-)baz": "bas",
+    "foo": "bar"
+  },
+  "(-)group2": {
+    "abc": 12345
+  },
+  "(+)group3": {
+    "fee": 100500
+  }
 }`;
 
 test('correct differences of json', () => {

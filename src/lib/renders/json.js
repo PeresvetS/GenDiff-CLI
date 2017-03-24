@@ -1,32 +1,25 @@
-import _ from 'lodash';
-
-
 const signs = {
-  added: '+',
-  parent: '',
-  removed: '-',
-  unchanged: ' ',
+  added: '(+)',
+  removed: '(-)',
+  unchanged: '',
 };
-
 
 const getDiff = (comparedData) => {
   const result = comparedData.reduce((acc, elem) => {
-    if (_.isArray(elem.value)) {
-      return { ...acc, [`${signs[elem.type]}${elem.key}`]: getDiff(elem.value) };
+    const { type, key, value, rem, add } = elem;
+    switch (type) {
+      case 'parent':
+        return { ...acc, [key]: getDiff(value) };
+      case 'changed':
+        return { ...acc, [`(+)${key}`]: add, [`(-)${key}`]: rem };
+      default:
+        return { ...acc, [`${signs[type]}${key}`]: value };
     }
-    if (elem.type === 'changed') {
-      return { ...acc, [`+ ${elem.key}`]: elem.new, [`- ${elem.key}`]: elem.old };
-    }
-    return { ...acc, [`${signs[elem.type]} ${elem.key}`]: elem.value };
-  }, {});
+  }, '');
   return result;
 };
 
-const toStr = comparedData => JSON.stringify(getDiff(comparedData), null, 4)
-.replace(/("\+\s)/g, '+ "')
-.replace(/("-\s)/g, '- "')
-.replace(/(\s"\s\s)/g, '   "')
+const toStr = comparedData => JSON.stringify(getDiff(comparedData), '', 2)
 .replace(/{/, '\n{');
-
 
 export default toStr;

@@ -6,29 +6,32 @@ const action = {
   changed: 'updated. ',
 };
 
+
 const message = (elem) => {
+  const { type, value, rem, add } = elem;
   let change;
-  if (elem.type === 'added') {
-    change = _.isObject(elem.value) ? 'complex value' : `value: ${elem.value}`;
+  if (type === 'added') {
+    change = _.isObject(value) ? 'complex value' : `value: ${value}`;
   } else {
-    change = (elem.type === 'changed') ? `From '${elem.old}' to '${elem.new}'` : '';
+    change = (type === 'changed') ? `From '${rem}' to '${add}'` : '';
   }
-  return `${action[elem.type]}${change}`;
+  return `${action[type]}${change}`;
 };
 
 const getDiff = (comparedData, parent) => {
   const path = parent ? `${parent}.` : '';
   const result = comparedData.reduce((acc, elem) => {
-    switch (elem.type) {
+    const { type, key, value } = elem;
+    switch (type) {
       case 'parent':
-        return [...acc, getDiff(elem.value, elem.key)];
+        return [...acc, getDiff(value, key)];
       case 'unchanged':
         return '';
       default:
-        return [...acc, `\nProperty '${path}${elem.key}' was ${message(elem)}`];
+        return [...acc, `\nProperty '${path}${key}' was ${message(elem)}`];
     }
   }, {});
-  return _.join(result, '');
+  return result.join('');
 };
 
 export default getDiff;

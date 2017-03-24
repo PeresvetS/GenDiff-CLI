@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import parse from './lib/parsers/';
-import getDifference from './lib/renders/';
+import parse from './lib/parsers';
+import getDifference from './lib/renders';
 import compareData from './lib/compare';
 
 const getData = file => fs.readFileSync(file, 'utf8');

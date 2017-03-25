@@ -48,8 +48,7 @@ Property 'group3' was removed
 Property 'verbose' was added with value: true
 Property 'group2' was added with complex value`;
 
-const correctJson = `
-{
+const correctJson = `{
   "common": {
     "setting1": "Value 1",
     "setting2": {
@@ -89,8 +88,7 @@ const correctJson = `
   }
 }`;
 
-const correctYml = `
-{
+const correctYml = `{
   "common": {
     "setting1": "Value 1",
     "setting2": {

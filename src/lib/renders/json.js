@@ -22,7 +22,6 @@ const getDiff = (comparedData) => {
   return result;
 };
 
-const toStr = comparedData => JSON.stringify(getDiff(comparedData), '', 2)
-.replace(/{/, '\n{');
+const toStr = comparedData => JSON.stringify(getDiff(comparedData), '', 2);
 
 export default toStr;

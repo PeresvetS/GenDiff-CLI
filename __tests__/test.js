@@ -51,19 +51,21 @@ Property 'group2' was added with complex value`;
 const correctJson = `
 {
   "common": {
-    "unchanged": {
-      "setting1": "Value 1",
-      "setting3": true
+    "setting1": "Value 1",
+    "setting2": {
+      "removed": "200"
     },
-    "removed": {
-      "setting2": "200",
-      "setting6": {
+    "setting3": true,
+    "setting6": {
+      "removed": {
         "key": "value"
       }
     },
-    "added": {
-      "setting4": "blah blah",
-      "setting5": {
+    "setting4": {
+      "added": "blah blah"
+    },
+    "setting5": {
+      "added": {
         "key5": "value5"
       }
     }
@@ -73,17 +75,15 @@ const correctJson = `
       "added": "bars",
       "removed": "bas"
     },
-    "unchanged": {
-      "foo": "bar"
-    }
+    "foo": "bar"
   },
-  "removed": {
-    "group2": {
+  "group2": {
+    "removed": {
       "abc": "12345"
     }
   },
-  "added": {
-    "group3": {
+  "group3": {
+    "added": {
       "fee": "100500"
     }
   }
@@ -92,19 +92,21 @@ const correctJson = `
 const correctYml = `
 {
   "common": {
-    "unchanged": {
-      "setting1": "Value 1",
-      "setting3": true
+    "setting1": "Value 1",
+    "setting2": {
+      "removed": 200
     },
-    "removed": {
-      "setting2": 200,
-      "setting6": {
+    "setting3": true,
+    "setting6": {
+      "removed": {
         "key": "value"
       }
     },
-    "added": {
-      "setting4": "blah blah",
-      "setting5": {
+    "setting4": {
+      "added": "blah blah"
+    },
+    "setting5": {
+      "added": {
         "key5": "value5"
       }
     }
@@ -114,17 +116,15 @@ const correctYml = `
       "added": "bars",
       "removed": "bas"
     },
-    "unchanged": {
-      "foo": "bar"
-    }
+    "foo": "bar"
   },
-  "removed": {
-    "group2": {
+  "group2": {
+    "removed": {
       "abc": 12345
     }
   },
-  "added": {
-    "group3": {
+  "group3": {
+    "added": {
       "fee": 100500
     }
   }

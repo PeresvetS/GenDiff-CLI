@@ -1,5 +1,5 @@
 const getDiff = (comparedData) => {
-  const result = comparedData.slice().reduce((acc, elem) => {
+  const result = comparedData.reduce((acc, elem) => {
     const { type, key, value } = elem;
     switch (type) {
       case 'parent':
